@@ -15,7 +15,7 @@ apply plugin: "java"
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-group = 'com.viridiansoftware.pipette'
+group = 'com.heartbuffer.pipette'
 version = '0.1.0-SNAPSHOT'
 
 repositories {
@@ -26,12 +26,12 @@ repositories {
 ext {
     commonsIoVersion="2.4"
     simpleXmlVersion="2.7.1"
-    jsonSimpleVersion="1.1"
+    gsonVersion="2.3.1"
     grokVersion="0.1.1"
-	luceneVersion="4.10.3"
-	elasticsearchVersion="1.4.4"
+	luceneVersion="4.10.4"
+	elasticsearchVersion="1.5.0"
 
-	junitVersion="4.8.1"
+	junitVersion="4.12"
 	jmockVersion="2.5.1"
 }
 
@@ -43,16 +43,12 @@ dependencies {
     compile "commons-io:commons-io:$commonsIoVersion"
     compile "org.simpleframework:simple-xml:$simpleXmlVersion"
     compile "io.thekraken:grok:$grokVersion"
-    compile "com.googlecode.json-simple:json-simple:$jsonSimpleVersion"
+    compile "com.google.code.gson:gson:$gsonVersion"
 	compile "org.elasticsearch:elasticsearch:$elasticsearchVersion"
 	
 	testCompile "junit:junit:$junitVersion"
 	testCompile "org.jmock:jmock-junit4:$jmockVersion"
 	testCompile "org.jmock:jmock-legacy:$jmockVersion"
-	testCompile ("org.apache.lucene:lucene-test-framework:$luceneVersion") {
-			exclude group: 'junit'
-	}
-	testCompile "org.elasticsearch:elasticsearch:$elasticsearchVersion:tests"
 }
 
 task docs(type: Javadoc) {

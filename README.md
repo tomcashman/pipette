@@ -15,3 +15,6 @@ The following inputs, filters and outputs are supported by pipette. Click the li
 | File          | Elasticsearch | File |
 | Kafka         | NDiff         | Kafka |
 |               | Timestamp     | Elasticsearch |
+
+## Contributing
+As stated before, simplicity, stability and performance are the goals of pipette.
