@@ -23,6 +23,8 @@
  */
 package com.heartbuffer.pipette.filter.config;
 
+import java.util.List;
+
 import com.heartbuffer.pipette.config.PipetteConfig;
 import com.heartbuffer.pipette.filter.Filter;
 
@@ -33,7 +35,7 @@ import com.heartbuffer.pipette.filter.Filter;
 public abstract class FilterConfig {
     private String id;
     private String type;
-    private String to;
+    private List<String> to;
     private int bufferSize;
     
     public String getId() {
@@ -52,11 +54,11 @@ public abstract class FilterConfig {
         this.type = type;
     }
 
-    public String getTo() {
+    public List<String> getTo() {
         return to;
     }
     
-    public void setTo(String to) {
+    public void setTo(List<String> to) {
         this.to = to;
     }
     

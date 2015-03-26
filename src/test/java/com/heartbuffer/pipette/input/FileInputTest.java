@@ -70,7 +70,7 @@ public class FileInputTest implements Inputable {
         fileInputConfig.setGrokPattern("%{COMMONAPACHELOG}");
         
         PipetteConfig config = new PipetteConfig();
-        config.setGrokPatternsPath(Paths.get(new File(".").getAbsolutePath(), "patterns").toAbsolutePath().toString());
+        config.setGrokPatternsDirectory(Paths.get(new File(".").getAbsolutePath(), "patterns").toAbsolutePath().toString());
         
         fileInput = new FileInput(fileInputConfig, config);
         fileInput.outputTo(this);

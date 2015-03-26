@@ -37,7 +37,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.google.gson.Gson;
-import com.heartbuffer.pipette.util.JsonObjectTypeToken;
+import com.heartbuffer.pipette.json.JsonObjectTypeToken;
 
 /**
  *

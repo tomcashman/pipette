@@ -23,15 +23,14 @@
  */
 package com.heartbuffer.pipette;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.heartbuffer.pipette.config.Filters;
-import com.heartbuffer.pipette.config.Inputs;
-import com.heartbuffer.pipette.config.Outputs;
 import com.heartbuffer.pipette.config.PipetteConfig;
+import com.heartbuffer.pipette.config.PipetteConfigLoader;
 import com.heartbuffer.pipette.filter.Filter;
 import com.heartbuffer.pipette.filter.config.FilterConfig;
 import com.heartbuffer.pipette.input.Input;
@@ -95,33 +94,35 @@ public class Pipette implements Runnable {
     private void wireComponents() {
         for (InputConfig config : inputConfigs) {
             Input input = inputs.get(config.getId());
-            String targetId = config.getTo();
+            
+            for(String targetId : config.getTo()) {
+                if (filters.containsKey(targetId)) {
+                    Filter filter = filters.get(targetId);
+                    input.outputTo(filter);
+                    continue;
+                }
 
-            if (filters.containsKey(targetId)) {
-                Filter filter = filters.get(targetId);
-                input.outputTo(filter);
-                continue;
+                if (outputs.containsKey(targetId)) {
+                    Output output = outputs.get(targetId);
+                    input.outputTo(output);
+                    continue;
+                }
+                
+                // TODO: Print no such target error
             }
-
-            if (outputs.containsKey(targetId)) {
-                Output output = outputs.get(targetId);
-                input.outputTo(output);
-                continue;
-            }
-
-            // TODO: Print no target error
         }
 
         for (FilterConfig config : filterConfigs) {
             Filter filter = filters.get(config.getId());
-            String targetId = config.getTo();
-
-            if (!outputs.containsKey(targetId)) {
-                // TODO: Print no target error
-                continue;
+            
+            for(String targetId : config.getTo()) {
+                if (!outputs.containsKey(targetId)) {
+                    // TODO: Print no such target error
+                    continue;
+                }
+                Output output = outputs.get(targetId);
+                filter.outputTo(output);
             }
-            Output output = outputs.get(targetId);
-            filter.outputTo(output);
         }
     }
     
@@ -171,14 +172,15 @@ public class Pipette implements Runnable {
         }
     }
 
-    public static void main(String[] args) {
-        PipetteConfig config = new PipetteConfig();
-        Inputs inputs = new Inputs();
-        Filters filters = new Filters();
-        Outputs outputs = new Outputs();
-
-        Pipette pipette = new Pipette(config, inputs.getInputs(), filters.getFilters(),
-                outputs.getOutputs());
+    public static void main(String[] args) throws IOException {
+        // TODO: Make this change filepath based on OS
+        PipetteConfigLoader configLoader = new PipetteConfigLoader("/etc/pipette/pipette.conf");
+        configLoader.loadConfiguration();
+        
+        Pipette pipette = new Pipette(configLoader.getPipetteConfig(), 
+                configLoader.getInputConfigs(), 
+                configLoader.getFilterConfigs(),
+                configLoader.getOutputConfigs());
         pipette.attachShutdownHook();
         pipette.start();
         pipette.waitForExit();

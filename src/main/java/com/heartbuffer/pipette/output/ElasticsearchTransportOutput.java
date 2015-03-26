@@ -37,7 +37,7 @@ import org.elasticsearch.node.Node;
 import org.elasticsearch.node.NodeBuilder;
 
 import com.heartbuffer.pipette.filter.EsDetermineDocumentDataFilter;
-import com.heartbuffer.pipette.util.JsonObjectUtils;
+import com.heartbuffer.pipette.json.JsonObjectUtils;
 
 /**
  *

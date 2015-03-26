@@ -21,17 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.heartbuffer.pipette.util;
+package com.heartbuffer.pipette.json;
 
-import java.lang.reflect.Type;
 import java.util.Map;
-
-import com.google.gson.reflect.TypeToken;
+import java.util.Set;
 
 /**
  *
  * @author Thomas Cashman
  */
-public class JsonObjectTypeToken extends TypeToken<Map<String, Object>> {
-    public static final Type TYPE = new JsonObjectTypeToken().getType();
+public class JsonObjectUtils {
+
+    public static void removeFields(Set<String> fields, Map<String, Object> json) {
+        for(String field : fields) {
+            json.remove(field);
+        }
+    }
 }

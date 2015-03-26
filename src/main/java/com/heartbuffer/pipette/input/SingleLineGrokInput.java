@@ -36,7 +36,7 @@ import oi.thekraken.grok.api.exception.GrokException;
 
 import com.google.gson.Gson;
 import com.heartbuffer.pipette.config.PipetteConfig;
-import com.heartbuffer.pipette.util.JsonObjectTypeToken;
+import com.heartbuffer.pipette.json.JsonObjectTypeToken;
 
 /**
  *
@@ -52,7 +52,7 @@ public abstract class SingleLineGrokInput extends Input {
         lines = new ArrayList<String>();
         gson = new Gson();
         
-        File patternsDir = new File(config.getGrokPatternsPath());
+        File patternsDir = new File(config.getGrokPatternsDirectory());
         grok = new Grok();
         if(patternsDir.isDirectory()) {
             for(File file : patternsDir.listFiles()) {

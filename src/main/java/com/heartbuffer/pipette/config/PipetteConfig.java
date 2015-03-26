@@ -29,17 +29,17 @@ package com.heartbuffer.pipette.config;
  * @author Thomas Cashman
  */
 public class PipetteConfig {
-    private String grokPatternsPath;
     private String inputsDirectory;
     private String filtersDirectory;
     private String outputsDirectory;
+    private String grokPatternsDirectory;
 
-    public String getGrokPatternsPath() {
-        return grokPatternsPath;
+    public String getGrokPatternsDirectory() {
+        return grokPatternsDirectory;
     }
 
-    public void setGrokPatternsPath(String grokPatternsPath) {
-        this.grokPatternsPath = grokPatternsPath;
+    public void setGrokPatternsDirectory(String grokPatternsPath) {
+        this.grokPatternsDirectory = grokPatternsPath;
     }
 
     public String getInputsDirectory() {

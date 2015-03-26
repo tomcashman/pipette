@@ -23,6 +23,8 @@
  */
 package com.heartbuffer.pipette.input.config;
 
+import java.util.List;
+
 import com.heartbuffer.pipette.config.PipetteConfig;
 import com.heartbuffer.pipette.input.Input;
 
@@ -33,7 +35,7 @@ import com.heartbuffer.pipette.input.Input;
 public abstract class InputConfig {
     private String id;
     private String type;
-    private String to;
+    private List<String> to;
 
     public String getId() {
         return id;
@@ -51,11 +53,11 @@ public abstract class InputConfig {
         this.type = type;
     }
 
-    public String getTo() {
+    public List<String> getTo() {
         return to;
     }
 
-    public void setTo(String to) {
+    public void setTo(List<String> to) {
         this.to = to;
     }
     
